@@ -80,7 +80,7 @@ one argument, the desired word count -- see
 WARNING: This variable is experimental and the calling convention is
 subject to change in the future.")
 
-(defvar gptel-quick-word-count 12
+(defvar gptel-quick-word-count 30
   "Approximate word count of LLM summary.")
 (defvar gptel-quick-timeout 10
   "Time in seconds before dismissing the summary.")
@@ -124,10 +124,10 @@ word count of the response."
          (gptel-backend (or gptel-quick-backend gptel-backend))
          (gptel-model (or gptel-quick-model gptel-model)))
     (gptel-request query-text
-      :system (funcall gptel-quick-system-message count)
-      :context (list query-text count
-                     (posn-at-point (and (use-region-p) (region-beginning))))
-      :callback #'gptel-quick--callback-posframe)))
+                   :system (funcall gptel-quick-system-message count)
+                   :context (list query-text count
+                                  (posn-at-point (and (use-region-p) (region-beginning))))
+                   :callback #'gptel-quick--callback-posframe)))
 
 ;; From (info "(elisp) Accessing Mouse")
 (defun gptel-quick--frame-relative-coordinates (position)
