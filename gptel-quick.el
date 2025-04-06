@@ -172,9 +172,8 @@ quick actions on the popup."
            (define-key map [remap keyboard-quit] #'clear-response)
            (define-key map (kbd "+") #'more-response)
            (define-key map [remap kill-ring-save] #'copy-response)
-           (define-key map (kbd "M-RET") #'create-chat)
            map)
-         nil #'clear-response nil gptel-quick-timeout)))))
+         (lambda() t) #'clear-response nil gptel-quick-timeout)))))
 
 (defun gptel-quick--update-posframe (response pos)
   "Show RESPONSE at in a posframe (at POS) or the echo area."
@@ -190,7 +189,7 @@ quick actions on the popup."
                        :string response
                        :position coords
                        :border-width 2
-                       :border-color (face-attribute 'vertical-border :foreground)
+                       :border-color "#FFFFFF"
                        :initialize #'visual-line-mode
                        :poshandler poshandler
                        :left-fringe 8
